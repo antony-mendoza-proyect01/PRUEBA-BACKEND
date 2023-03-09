@@ -19,7 +19,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
     //Validamos si el usuario ya existe en la base de datos
-    const user = yield user_1.User.findAll({ where: { username: username } });
+    const user = yield user_1.User.findOne({ where: { username: username } });
     // seria el reemplazo de esto: SELECT * FROM USER WHERE USARNAME = PARAMETRO
     if (user) {
         return res.status(400).json({
@@ -47,7 +47,6 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.newUser = newUser;
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
-    //usando JWT
     //Validamos si el usuario existe en la base de datos 
     const user = yield user_1.User.findOne({ where: { username: username } });
     if (!user) {

@@ -1,5 +1,5 @@
  import express, { Application } from 'express';
-import sequelize from '../db/connection';
+import cors from 'cors'
  import routerProduct from '../routes/product';
 import routesUser from '../routes/user';
 import { Product } from './product';
@@ -30,7 +30,10 @@ import { User } from './user';
     }
 
      midlewares(){
+        //Parseo Body
         this.app.use(express.json())
+        //Cors
+        this.app.use(cors());
     }
 
     async dbConnect(){

@@ -8,7 +8,7 @@ export const newUser =  async (req : Request, res: Response) => {
  const{username, password} = req.body;
 
  //Validamos si el usuario ya existe en la base de datos
- const user = await User.findAll({where:{username: username} })
+ const user = await User.findOne({where: {username: username} })
 
 // seria el reemplazo de esto: SELECT * FROM USER WHERE USARNAME = PARAMETRO
 
@@ -44,7 +44,7 @@ export const loginUser = async  (req : Request, res: Response) => {
 
   const{username,password} = req.body;
     
-  //usando JWT
+
 //Validamos si el usuario existe en la base de datos 
 const user: any = await User.findOne({where: {username :  username}});
 
@@ -66,7 +66,7 @@ return res.status(400).json({
 //Generamos Token
 const token = jwt.sign({
   username: username
-},process.env.SECRET_KEY|| 'antony123')
+},process.env.SECRET_KEY|| 'antony123');
 
 res.json({token});
 }
